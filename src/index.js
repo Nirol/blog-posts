@@ -1,17 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Comment, CommentProps } from './Comment'
+import user1Avatar from './image/a.png'
+import user2Avatar from './image/g.png'
+// CommentProps props are: name, time, text, avatar
+const user1Comment = new CommentProps("Sarah", "Today 15:00", "nice!", user1Avatar);
+const user2Comment = new CommentProps("Eli", "Today 15:11", "yep its prerty good", user2Avatar);
+const user1Comment2 = new CommentProps("Sarah", "Today 15:15", "lol", user1Avatar);
+
+
+const App = () => {
+
+  return (
+    <div>
+      <div className='ui comments'>
+        <Comment comment={user1Comment} />
+        <Comment comment={user2Comment} />
+        <Comment comment={user1Comment2} />
+      </div>
+    </div>
+  )
+}
+
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
