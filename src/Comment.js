@@ -17,7 +17,6 @@ class CommentProps {
 
 
 const Comment = (props) => {
-  console.log(props)
 
   return (
 
@@ -25,7 +24,7 @@ const Comment = (props) => {
 
       <a href="/" className='avatar'>
 
-        <img src={props.comment.avatar} style={{ height: '50px', width: '50px', }} alt="profile picture" />
+        <img src={props.comment.avatar} style={{ height: '50px', width: '50px', }} alt="profile" />
       </a>
       <div className='content'>
         <a href="/" className='author'>
