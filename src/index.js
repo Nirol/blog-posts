@@ -1,28 +1,60 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Comment, CommentProps } from './Comment'
-import user1Avatar from './image/a.png'
-import user2Avatar from './image/g.png'
-// CommentProps props are: name, time, text, avatar
-const user1Comment = new CommentProps("Sarah", "Today 15:00", "nice!", user1Avatar);
-const user2Comment = new CommentProps("Eli", "Today 15:11", "yep its prerty good", user2Avatar);
-const user1Comment2 = new CommentProps("Sarah", "Today 15:15", "lol", user1Avatar);
 
 
-const App = () => {
+// the old functional component, cannot use state ( not including hooks )
 
-  return (
-    <div>
-      <div className='ui comments'>
-        <Comment comment={user1Comment} />
-        <Comment comment={user2Comment} />
-        <Comment comment={user1Comment2} />
-      </div>
-    </div>
-  )
+// const App = () => {
+//   window.navigator.geolocation.getCurrentPosition(
+//     // the sucess callback
+//     (position) => console.log(position),
+
+//     // the failure callback
+//     (error) => console.log(error)
+
+//   );
+//   return (
+//     <div>
+
+//        You are in the north hemosphere
+//     </div>
+//   )
+// }
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { latitude: null, errorMessage: '' }
+    window.navigator.geolocation.getCurrentPosition(
+      // the sucess callback
+      (position) => {
+        this.setState({ latitude: position.coords.latitude })
+      },
+
+      // the failure callback
+      (error) => {
+        this.setState({ errorMessage: error.message })
+      },
+
+    )
+
+  }
+
+  render() {
+
+
+
+    return (
+      < div >
+        {this.state.latitude}
+        {this.state.errorMessage}-
+      </div >
+
+    )
+
+  }
 }
-
-
 
 
 ReactDOM.render(
