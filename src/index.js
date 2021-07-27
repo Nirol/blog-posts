@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import HemisphereDisplay from './HemisphereDisplay'
 
 // the old functional component, cannot use state ( not including hooks )
 
@@ -23,9 +23,12 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = { latitude: null, errorMessage: '' }
+
+  // avoid using the constructor for init class state
+  state = { latitude: null, errorMessage: '' }
+
+  // move loading geolocation into componentDidMount
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       // the sucess callback
       (position) => {
@@ -38,20 +41,34 @@ class App extends React.Component {
       },
 
     )
-
   }
 
   render() {
 
+    if (!this.state.errorMessage && this.state.latitude) {
+      return (
+        <div>
+          <HemisphereDisplay latitude={this.state.latitude} />
+
+        </div>
+      )
+    }
+    else if (this.state.errorMessage && !this.state.latitude) {
+      return (
+        <div>
+          {this.state.errorMessage}
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          Loading...
+        </div>
+      )
+    }
 
 
-    return (
-      < div >
-        {this.state.latitude}
-        {this.state.errorMessage}-
-      </div >
-
-    )
 
   }
 }
