@@ -5,25 +5,16 @@ import React from 'react';
 
 class SearchInput extends React.Component {
 
-
   constructor(props) {
     super(props)
     this.state = { entry: '' }
-
-    //one way to bind onFormSubmit:
-    // this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
-  // onFormSubmit(event) {
-  //   event.preventDefault()
-  //     console.log(this.state.entry)
 
-  // }
-
-  // another option is to move into arrow function that will automaticlly bind the method:
   onFormSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state.entry)
+    // on a class componnet you adress props with this.props
+    this.props.onSearchSubmit(this.state.entry)
   }
 
 
